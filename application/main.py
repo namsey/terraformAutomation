@@ -8,6 +8,7 @@ from config.config_reader import read_config
 from logging_setup.logging_config import setup_logging
 from model.model_operations import setup_model, generate_content
 from utils.text_utils import to_markdown
+from prompt.prompt_input import get_combined_prompt
 
 
 def main():
@@ -15,12 +16,16 @@ def main():
     try:
         config = read_config()
         model = setup_model(config)
-        prompt = input("Enter prompt: ")
+        prompt = get_combined_prompt()
         response = generate_content(model, prompt)
 
         print(f"Prompt: {prompt}")
         print(f"Generated Text:\n{to_markdown(response.text)}")
         print(f"Prompt Feedback: {response.prompt_feedback}")
+
+        # Print the number of tokens used
+        tokens_used = response.metadata.get('tokens_used', 'N/A')
+        print(f"Number of tokens used: {tokens_used}")
 
     except Exception as e:
         print(f"An error occurred: {e}")
