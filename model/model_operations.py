@@ -27,10 +27,6 @@ def generate_content(model, prompt):
         if response.text.strip().lower() == 'output token limit exceeded':
             raise TokenExhaustionError("Output token limit exceeded. Please try again later.")
 
-        # Log the number of tokens used
-        tokens_used = response.metadata.get('tokens_used', 'N/A')
-        logging.info(f"Number of tokens used: {tokens_used}")
-
         return response
     except TokenExhaustionError as e:
         logging.error(f"TokenExhaustionError: {e}")

@@ -13,22 +13,14 @@ from prompt.prompt_input import get_combined_prompt
 
 def main():
     setup_logging()
-    try:
-        config = read_config()
-        model = setup_model(config)
-        prompt = get_combined_prompt()
-        response = generate_content(model, prompt)
+    config = read_config()
+    model = setup_model(config)
+    prompt = get_combined_prompt()
+    response = generate_content(model, prompt)
 
-        print(f"Prompt: {prompt}")
-        print(f"Generated Text:\n{to_markdown(response.text)}")
-        print(f"Prompt Feedback: {response.prompt_feedback}")
-
-        # Print the number of tokens used
-        tokens_used = response.metadata.get('tokens_used', 'N/A')
-        print(f"Number of tokens used: {tokens_used}")
-
-    except Exception as e:
-        print(f"An error occurred: {e}")
+    print(f"Prompt: {prompt}")
+    print(f"Generated Text:\n{to_markdown(response.text)}")
+    print(f"Prompt Feedback: {response.prompt_feedback}")
 
 
 if __name__ == "__main__":

@@ -1,4 +1,8 @@
 {
   "api_key": "AIzaSyCY8ivYZDMShpYpEepMU8rpHBOHX9QOWN8",
-  "model_name": "gemini-1.5-flash"
+  "model_name": "gemini-1.5-flash",
+  "logging": {
+    "level": "DEBUG",
+    "format": "%(asctime)s %(levelname)s %(message)s"
+  }
 }
