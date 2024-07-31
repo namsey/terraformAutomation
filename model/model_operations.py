@@ -6,13 +6,19 @@ class TokenExhaustionError(Exception):
     """Custom exception raised when output token limit is exceeded."""
     pass
 
+def model_operations(config, prompt):
+    logging.info("Model Operations started")
+    model = setup_model(config)
+    response = generate_content(model,prompt)
+    logging.info("Model Operations ended")
+    return response
 
 def setup_model(config):
     try:
-        configure(api_key=config['api_key'])
-        logging.info("API key configured successfully.")
-        model = GenerativeModel(config['model_name'])
-        logging.info(f"Generative model '{config['model_name']}' initialized successfully.")
+        configure(api_key=config['key'])
+        logging.debug("API key configured successfully.")
+        model = GenerativeModel(config['name'])
+        logging.debug(f"Generative model '{config['model_name']}' initialized successfully.")
         return model
     except KeyError as e:
         logging.error(f"KeyError: {e}")

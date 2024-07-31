@@ -1,0 +1,11 @@
+model:
+  key: "AIzaSyCY8ivYZDMShpYpEepMU8rpHBOHX9QOWN8"
+  name: "gemini-1.5-flash"
+
+logging:
+  logging_file: "terraform_automation.log"
+  logging_level: "DEBUG"
+  logging_format: "%(asctime)s :: %(levelname)s :: %(message)s"
+
+defaults:
+  region: "us-east-1"
