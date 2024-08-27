@@ -18,7 +18,7 @@ def setup_model(config):
         configure(api_key=config['key'])
         logging.debug("API key configured successfully.")
         model = GenerativeModel(config['name'])
-        logging.debug(f"Generative model '{config['model_name']}' initialized successfully.")
+        logging.debug(f"Generative model '{config['name']}' initialized successfully.")
         return model
     except KeyError as e:
         logging.error(f"KeyError: {e}")

@@ -9,3 +9,6 @@ logging:
 
 defaults:
   region: "us-east-1"
+
+output:
+  file_path: "C:/Users/AVII/PycharmProjects/terraformAutomation/TFA/output.txt"
