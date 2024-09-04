@@ -10,15 +10,16 @@ from model.model_operations import model_operations
 
 class Core:
     def __init__(self, config_path):
-        self.__config_path = config_path
-        setup_logging(config_path)
+        self.__config = read_config(config_path)
+        setup_logging(self.__config['logging'])
 
     def run_automation(self):
         try:
             logging.debug("Automation process started")
 
-            model_config = read_config(self.__config_path, 'model')
-            output_config = read_config(self.__config_path, 'output')
+            model_config = self.__config['model']
+            output_config = self.__config['output']
+
             prompt = get_combined_prompt()
             response = model_operations(model_config, prompt)
 
@@ -37,9 +38,7 @@ class Core:
                 logging.info(f"Generated text saved to {output_file_path}")
             else:
                 logging.warning("Output file path not specified in config")
-
             logging.debug("Automation process ended")
-
             return "Process successfully completed"
         except Exception as e:
             msg = f"Automation process failed : {e}"

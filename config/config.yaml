@@ -1,5 +1,5 @@
 model:
-  key: "AIzaSyCY8ivYZDMShpYpEepMU8rpHBOHX9QOWN8"
+  key: ""
   name: "gemini-1.5-flash"
 
 logging:
@@ -11,4 +11,4 @@ defaults:
   region: "us-east-1"
 
 output:
-  file_path: "C:/Users/AVII/PycharmProjects/terraformAutomation/TFA/output.txt"
+  file_path: "results/output.txt"

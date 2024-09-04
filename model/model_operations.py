@@ -2,16 +2,13 @@ import logging
 from google.generativeai import GenerativeModel, configure
 
 
-class TokenExhaustionError(Exception):
-    """Custom exception raised when output token limit is exceeded."""
-    pass
-
 def model_operations(config, prompt):
     logging.info("Model Operations started")
     model = setup_model(config)
-    response = generate_content(model,prompt)
+    response = generate_content(model, prompt)
     logging.info("Model Operations ended")
     return response
+
 
 def setup_model(config):
     try:
@@ -21,8 +18,9 @@ def setup_model(config):
         logging.debug(f"Generative model '{config['name']}' initialized successfully.")
         return model
     except KeyError as e:
-        logging.error(f"KeyError: {e}")
-        raise
+        msg = f"Model Setup failed : {e}"
+        logging.error(msg)
+        raise Exception(msg)
 
 
 def generate_content(model, prompt):
@@ -31,12 +29,12 @@ def generate_content(model, prompt):
         logging.info("Content generated successfully.")
 
         if response.text.strip().lower() == 'output token limit exceeded':
-            raise TokenExhaustionError("Output token limit exceeded. Please try again later.")
+            msg = "Output token limit exceeded. Please try again later."
+            logging.error(msg)
+            raise Exception(msg)
 
         return response
-    except TokenExhaustionError as e:
-        logging.error(f"TokenExhaustionError: {e}")
-        raise
     except Exception as e:
-        logging.error(f"Error: {e}")
-        raise
+        msg = f"API Call failed : {e}"
+        logging.error(msg)
+        raise Exception(msg)
